@@ -40,3 +40,9 @@ jobs:
           path: novaos-1.0-amd64.iso
           retention-days: 14
           compression-level: 0
+      - name: Publish ISO to GitHub Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0
+          name: NovaOS 1.0
+          files: novaos-1.0-amd64.iso
