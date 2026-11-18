@@ -1,0 +1,17 @@
+# Boot splash support
+plymouth
+plymouth-themes
+
+# Handy tools in the live system
+nano
+curl
+wget
+git
+htop
+neofetch
+
+# --- Optional desktop environment ---
+# Uncomment ONE line to get a graphical desktop in the ISO (bigger download).
+# task-xfce-desktop
+# task-gnome-desktop
+# task-kde-desktop

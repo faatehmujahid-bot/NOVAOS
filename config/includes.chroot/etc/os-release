@@ -1,0 +1,8 @@
+NAME="NovaOS"
+VERSION="1.0 (Nova)"
+ID=novaos
+ID_LIKE=debian
+PRETTY_NAME="NovaOS 1.0 (based on Debian GNU/Linux 12 bookworm)"
+VERSION_ID="1.0"
+VERSION_CODENAME=bookworm
+HOME_URL="https://apexlabsnovaos789.netlify.app"
