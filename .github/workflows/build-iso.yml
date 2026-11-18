@@ -1,0 +1,42 @@
+name: Build NovaOS ISO
+
+on:
+  workflow_dispatch:      # adds a "Run workflow" button in the Actions tab
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    # Build inside real Debian 12 so live-build behaves exactly as on Debian.
+    container:
+      image: debian:bookworm
+      options: --privileged
+
+    steps:
+      - name: Install build tools
+        run: |
+          apt-get update
+          apt-get install -y git ca-certificates live-build debootstrap squashfs-tools \
+            xorriso syslinux syslinux-common isolinux syslinux-utils grub-efi-amd64-bin \
+            grub-pc-bin mtools dosfstools cpio zip
+
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Build NovaOS ISO
+        run: |
+          chmod +x build.sh config/hooks/normal/*.hook.chroot
+          ./build.sh
+
+      - name: Show result
+        run: ls -lh *.iso
+
+      - name: Upload ISO as downloadable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: novaos-iso
+          path: novaos-1.0-amd64.iso
+          retention-days: 14
+          compression-level: 0
